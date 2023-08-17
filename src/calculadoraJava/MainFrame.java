@@ -16,7 +16,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
     }
-    int n1 = 0, n2 = 0, op;
+    int n1 = 0, n2 = 0, op = -1, flag = 0;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -119,6 +119,11 @@ public class MainFrame extends javax.swing.JFrame {
         button1.setToolTipText("");
         button1.setBorder(null);
         button1.setBorderPainted(false);
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         button3.setBackground(new java.awt.Color(102, 102, 102));
         button3.setForeground(new java.awt.Color(255, 255, 255));
@@ -126,6 +131,11 @@ public class MainFrame extends javax.swing.JFrame {
         button3.setToolTipText("");
         button3.setBorder(null);
         button3.setBorderPainted(false);
+        button3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button3ActionPerformed(evt);
+            }
+        });
 
         button5.setBackground(new java.awt.Color(102, 102, 102));
         button5.setForeground(new java.awt.Color(255, 255, 255));
@@ -133,6 +143,11 @@ public class MainFrame extends javax.swing.JFrame {
         button5.setToolTipText("");
         button5.setBorder(null);
         button5.setBorderPainted(false);
+        button5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button5ActionPerformed(evt);
+            }
+        });
 
         buttonDiv.setBackground(new java.awt.Color(255, 153, 0));
         buttonDiv.setText("÷");
@@ -187,6 +202,11 @@ public class MainFrame extends javax.swing.JFrame {
         button0.setBorder(null);
         button0.setBorderPainted(false);
         button0.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        button0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button0ActionPerformed(evt);
+            }
+        });
 
         buttonMP.setBackground(new java.awt.Color(204, 204, 204));
         buttonMP.setForeground(new java.awt.Color(0, 0, 0));
@@ -212,6 +232,11 @@ public class MainFrame extends javax.swing.JFrame {
         button2.setToolTipText("");
         button2.setBorder(null);
         button2.setBorderPainted(false);
+        button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button2ActionPerformed(evt);
+            }
+        });
 
         button7.setBackground(new java.awt.Color(102, 102, 102));
         button7.setForeground(new java.awt.Color(255, 255, 255));
@@ -219,6 +244,11 @@ public class MainFrame extends javax.swing.JFrame {
         button7.setToolTipText("");
         button7.setBorder(null);
         button7.setBorderPainted(false);
+        button7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button7ActionPerformed(evt);
+            }
+        });
 
         button4.setBackground(new java.awt.Color(102, 102, 102));
         button4.setForeground(new java.awt.Color(255, 255, 255));
@@ -372,53 +402,43 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tFCalcActionPerformed
 
     private void button9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button9ActionPerformed
-        // TODO add your handling code here:
+        virtualNumKey("9");
     }//GEN-LAST:event_button9ActionPerformed
 
     private void button8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button8ActionPerformed
-        // TODO add your handling code here:
+        virtualNumKey("8");
     }//GEN-LAST:event_button8ActionPerformed
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-        // TODO add your handling code here:
+        virtualNumKey("4");
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
-        // TODO add your handling code here:
+        virtualNumKey("6");
     }//GEN-LAST:event_button6ActionPerformed
 
     private void buttonPlusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlusActionPerformed
-        n1 = Integer.parseInt(tFCalc.getText());
-        tFCalc.grabFocus();
         op = 0;
+        getNum();
     }//GEN-LAST:event_buttonPlusActionPerformed
 
     private void buttonDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDivActionPerformed
-        n1 = Integer.parseInt(tFCalc.getText());
-        tFCalc.grabFocus();
         op = 3;
+        getNum();
     }//GEN-LAST:event_buttonDivActionPerformed
 
     private void buttonEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEqualActionPerformed
-        int sol = 0;
-        n2 = Integer.parseInt(tFCalc.getText());
-        if(op == 0) sol = n1 + n2;
-        else if(op == 1) sol = n1 - n2;
-        else if(op == 2) sol = n1 * n2;
-        else if(op == 3) sol = n1 / n2;
-        tFCalc.setText(Integer.toString(sol));
+        equal();
     }//GEN-LAST:event_buttonEqualActionPerformed
 
     private void buttonMultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMultActionPerformed
-        n1 = Integer.parseInt(tFCalc.getText());
-        tFCalc.grabFocus();
         op = 2;
+        getNum();
     }//GEN-LAST:event_buttonMultActionPerformed
 
     private void buttonMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMinusActionPerformed
-        n1 = Integer.parseInt(tFCalc.getText());
-        tFCalc.grabFocus();
         op = 1;
+        getNum();
     }//GEN-LAST:event_buttonMinusActionPerformed
 
     private void buttonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCActionPerformed
@@ -427,16 +447,96 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCActionPerformed
 
     private void tFCalcFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tFCalcFocusGained
-        tFCalc.selectAll();
+        //tFCalc.selectAll();
     }//GEN-LAST:event_tFCalcFocusGained
 
     private void tFCalcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFCalcKeyTyped
-        char c = evt.getKeyChar();
+        Character c = evt.getKeyChar();
+        String str = tFCalc.getText();
+        if(str.startsWith("0")) tFCalc.setText("");
+        flag = 1;
+        if(c.compareTo('+') == 0){
+            op = 0;
+            getNum();
+        }
+        if(c.compareTo('-') == 0){
+            op = 1;
+            getNum();
+        }
+        if(c.compareTo('*') == 0 || c.compareTo('x') == 0){
+            op = 2;
+            getNum();
+        }
+        if(c.compareTo('/') == 0){
+            op = 3;
+            getNum();
+        }
+        if(c.compareTo('\n') == 0 || c.compareTo('=') == 0){
+            equal();
+        }
         if(!Character.isDigit(c)){
             evt.consume();
         }
     }//GEN-LAST:event_tFCalcKeyTyped
 
+    private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
+        virtualNumKey("7");
+    }//GEN-LAST:event_button7ActionPerformed
+
+    private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
+        virtualNumKey("5");
+    }//GEN-LAST:event_button5ActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        virtualNumKey("1");
+    }//GEN-LAST:event_button1ActionPerformed
+
+    private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
+        virtualNumKey("2");
+    }//GEN-LAST:event_button2ActionPerformed
+
+    private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
+        virtualNumKey("3");
+    }//GEN-LAST:event_button3ActionPerformed
+
+    private void button0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button0ActionPerformed
+        virtualNumKey("0");
+    }//GEN-LAST:event_button0ActionPerformed
+    
+    private void virtualNumKey(String num){
+        String str = tFCalc.getText();
+        if(str.startsWith("0") || flag == 0) {
+            str = num;
+            flag = 1;
+        }
+        else str += num;
+        tFCalc.setText(str);
+        tFCalc.grabFocus();
+    }
+    
+    private void getNum(){
+        n1 = Integer.parseInt(tFCalc.getText());
+        tFCalc.grabFocus();
+        tFCalc.selectAll();
+        flag = 0;
+    }
+    
+    private void equal(){
+        int sol = 0; double solF = 0.0f;
+        n2 = Integer.parseInt(tFCalc.getText());
+        if(op == 3){ 
+            solF = (float) n1 / n2;
+            tFCalc.setText(Double.toString(solF));
+        } else{
+            if(op == 0) sol = n1 + n2;
+            if(op == 1) sol = n1 - n2;
+            if(op == 2) sol = n1 * n2;
+            tFCalc.setText(Integer.toString(sol));
+        }
+        tFCalc.grabFocus();
+        tFCalc.selectAll();
+        flag = 0;
+    }
     /**
      * @param args the command line arguments
      */
