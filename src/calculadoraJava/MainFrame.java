@@ -16,7 +16,9 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
     }
-    int n1 = 0, n2 = 0, op = -1, flag = 0;
+    
+    Double n1 = 0.0d, n2 = 0.0d;
+    int op = -1, flag = 0;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,6 +168,11 @@ public class MainFrame extends javax.swing.JFrame {
         buttonFloat.setToolTipText("");
         buttonFloat.setBorder(null);
         buttonFloat.setBorderPainted(false);
+        buttonFloat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonFloatActionPerformed(evt);
+            }
+        });
 
         button6.setBackground(new java.awt.Color(102, 102, 102));
         button6.setForeground(new java.awt.Color(255, 255, 255));
@@ -214,6 +221,11 @@ public class MainFrame extends javax.swing.JFrame {
         buttonMP.setToolTipText("");
         buttonMP.setBorder(null);
         buttonMP.setBorderPainted(false);
+        buttonMP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonMPActionPerformed(evt);
+            }
+        });
 
         buttonPlus.setBackground(new java.awt.Color(255, 153, 0));
         buttonPlus.setText("+");
@@ -453,8 +465,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void tFCalcKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tFCalcKeyTyped
         Character c = evt.getKeyChar();
         String str = tFCalc.getText();
-        if(str.startsWith("0")) tFCalc.setText("");
-        flag = 1;
         if(c.compareTo('+') == 0){
             op = 0;
             getNum();
@@ -477,6 +487,8 @@ public class MainFrame extends javax.swing.JFrame {
         if(!Character.isDigit(c)){
             evt.consume();
         }
+        if((str.startsWith("0") && !str.contains(".")) && Character.isDigit(c)) tFCalc.setText("");
+        flag = 1;
     }//GEN-LAST:event_tFCalcKeyTyped
 
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
@@ -502,11 +514,24 @@ public class MainFrame extends javax.swing.JFrame {
     private void button0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button0ActionPerformed
         virtualNumKey("0");
     }//GEN-LAST:event_button0ActionPerformed
+
+    private void buttonFloatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFloatActionPerformed
+        String str = tFCalc.getText();
+        if(!str.contains(".")){
+            virtualNumKey(".");
+        }
+    }//GEN-LAST:event_buttonFloatActionPerformed
+
+    private void buttonMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMPActionPerformed
+        String str = tFCalc.getText();
+        //if(str.startsWith("-")) TfCalc.setText("")
+    }//GEN-LAST:event_buttonMPActionPerformed
     
     private void virtualNumKey(String num){
         String str = tFCalc.getText();
-        if(str.startsWith("0") || flag == 0) {
-            str = num;
+        if((str.startsWith("0") && !str.contains(".")) || flag == 0) {
+            if(num.equals(".")) str = "0.";
+            else str = num;
             flag = 1;
         }
         else str += num;
@@ -515,27 +540,29 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void getNum(){
-        n1 = Integer.parseInt(tFCalc.getText());
+        n1 = Double.valueOf(tFCalc.getText());
         tFCalc.grabFocus();
         tFCalc.selectAll();
         flag = 0;
     }
     
     private void equal(){
-        int sol = 0; double solF = 0.0f;
-        n2 = Integer.parseInt(tFCalc.getText());
-        if(op == 3){ 
-            solF = (float) n1 / n2;
-            tFCalc.setText(Double.toString(solF));
-        } else{
+        if(op > -1) {
+            double sol = 0.0d;
+            n2 = Double.valueOf(tFCalc.getText());
             if(op == 0) sol = n1 + n2;
             if(op == 1) sol = n1 - n2;
             if(op == 2) sol = n1 * n2;
-            tFCalc.setText(Integer.toString(sol));
+            if(op == 3) sol = n1 / n2;
+            if(sol - (int)sol == 0.0d){
+                tFCalc.setText(Integer.toString((int) sol));
+            } else {
+                tFCalc.setText(Double.toString(sol));
+            }
+            tFCalc.grabFocus();
+            tFCalc.selectAll();
+            flag = 0; 
         }
-        tFCalc.grabFocus();
-        tFCalc.selectAll();
-        flag = 0;
     }
     /**
      * @param args the command line arguments
