@@ -524,7 +524,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void buttonMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMPActionPerformed
         String str = tFCalc.getText();
-        //if(str.startsWith("-")) TfCalc.setText("")
+        //if(flag == 0) str = "0"; 
+        if(str.startsWith("-")) str = str.substring(1);
+        else str = "-" + str.substring(0);
+        tFCalc.setText(str);
     }//GEN-LAST:event_buttonMPActionPerformed
     
     private void virtualNumKey(String num){
