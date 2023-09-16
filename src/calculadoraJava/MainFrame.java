@@ -191,6 +191,11 @@ public class MainFrame extends javax.swing.JFrame {
         buttonForCent.setText("%");
         buttonForCent.setToolTipText("");
         buttonForCent.setBorder(null);
+        buttonForCent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonForCentActionPerformed(evt);
+            }
+        });
 
         buttonEqual.setBackground(new java.awt.Color(255, 153, 0));
         buttonEqual.setText("=");
@@ -481,6 +486,11 @@ public class MainFrame extends javax.swing.JFrame {
             op = 3;
             getNum();
         }
+        
+        if(c.compareTo('%') == 0) {
+            tFCalc.setText(Double.toString(Double.parseDouble(tFCalc.getText())/100));
+        }
+            
         if(c.compareTo('\n') == 0 || c.compareTo('=') == 0){
             equal();
         }
@@ -523,12 +533,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonFloatActionPerformed
 
     private void buttonMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMPActionPerformed
-        String str = tFCalc.getText();
-        //if(flag == 0) str = "0"; 
+        String str = tFCalc.getText(); 
         if(str.startsWith("-")) str = str.substring(1);
         else str = "-" + str.substring(0);
         tFCalc.setText(str);
     }//GEN-LAST:event_buttonMPActionPerformed
+
+    private void buttonForCentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonForCentActionPerformed
+        tFCalc.setText(Double.toString(Double.parseDouble(tFCalc.getText())/100));
+    }//GEN-LAST:event_buttonForCentActionPerformed
     
     private void virtualNumKey(String num){
         String str = tFCalc.getText();
